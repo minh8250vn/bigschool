@@ -1,16 +1,28 @@
-﻿using System;
+﻿using Lab02_web.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Lab02_web.Controllers
 {
+
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext dbContext;
+        public HomeController()
         {
-            return View();
+            dbContext = new ApplicationDbContext();
+        }
+            public ActionResult Index()
+        {
+            var upcommingCourses = dbContext.Courses
+                .Include(c => c.Lecturer)
+                .Include(c => c.Category)
+                .Where(c => c.DateTime > DateTime.Now);
+            return View(upcommingCourses);
         }
 
         public ActionResult About()

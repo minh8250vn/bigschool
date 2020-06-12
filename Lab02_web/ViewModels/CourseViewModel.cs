@@ -19,6 +19,6 @@ namespace Lab02_web.ViewModels
         [Required]
         public byte Category { get; set; }
         public IEnumerable<Category> Categories { get; set; }
-        public DateTime GetDateTime() { return DateTime.Parse(string.Format("{0} {1}", Date, Time)); }
+        public DateTime GetDateTime() { return DateTime.Parse(string.Format("{0} {1} ", Date, Time)); }
     }
 }
